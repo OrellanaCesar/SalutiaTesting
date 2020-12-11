@@ -1,6 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import TimeoutException
 import time
 from Models.TestCaseRuns import *
 
@@ -40,23 +38,23 @@ class Login(object):
         time.sleep(1)
         self.submit.click()
         wait = self.browser.implicitly_wait(5)  # seconds
-        items = []
-        items.append(self.browser.find_element_by_name('titulo-Paciente').text)
+        values_obteined = []
+        values_obteined.append(self.browser.find_element_by_name('titulo-Paciente').text)
         config = self.browser.find_elements_by_id('menu-config')
         for x in config:
-            items.append(x.text)
+            values_obteined.append(x.text)
         usuarios = self.browser.find_elements_by_id('menu-usuarios')
         for x in usuarios:
-            items.append(x.text)
-        values = ['Datos de Pacientes', u'Configuración', 'Usuarios']
+            values_obteined.append(x.text)
+        values_expected = ['Datos de Pacientes', u'Configuración', 'Usuarios']
         test = CasoPrubaRun()
-        if self.equalsValues(items, values):
+        if self.equalsValues(values_obteined,values_expected):
             result = "Correcto"
         else:
             result = "Error"
         test.insert(inputs,
-                    items,
-                    values,
+                    values_obteined,
+                    values_expected,
                     result,
                     "Usuarios",
                     "Login Correcto Admin",
@@ -80,23 +78,23 @@ class Login(object):
         time.sleep(1)
         self.submit.click()
         wait = self.browser.implicitly_wait(5)  # seconds
-        items = []
-        items.append(self.browser.find_element_by_name('titulo-Paciente').text)
+        values_obteined = []
+        values_obteined.append(self.browser.find_element_by_name('titulo-Paciente').text)
         config = self.browser.find_elements_by_id('menu-config')
         if len(config) == 0:
-            items.append('')
+            values_obteined.append('')
         usuarios = self.browser.find_elements_by_id('menu-usuarios')
         if len(usuarios) == 0:
-            items.append('')
-        values = ['Datos de Pacientes', '', '']
+            values_obteined.append('')
+        values_expected = ['Datos de Pacientes', '', '']
         test = CasoPrubaRun()
-        if self.equalsValues(items, values):
+        if self.equalsValues(values_obteined, values_expected):
             result = "Correcto"
         else:
             result = "Error"
         test.insert(inputs,
-                    items,
-                    values,
+                    values_expected,
+                    values_obteined,
                     result,
                     "Usuarios",
                     "Login Correcto Secretario",
@@ -120,20 +118,20 @@ class Login(object):
         time.sleep(1)
         self.submit.click()
         wait = self.browser.implicitly_wait(5)  # seconds
-        items = []
+        values_obteined = []
         agenda = self.browser.find_elements_by_id('menu-agenda')
         for x in agenda:
-            items.append(x.text)
+            values_obteined.append(x.text)
 
-        values = ['Agenda']
+        values_expected = ['Agenda']
         test = CasoPrubaRun()
-        if self.equalsValues(items, values):
+        if self.equalsValues(values_obteined, values_expected):
             result = "Correcto"
         else:
             result = "Error"
         test.insert(inputs,
-                    items,
-                    values,
+                    values_expected,
+                    values_obteined,
                     result,
                     "Usuarios",
                     "Login Correcto Profesional",
@@ -148,11 +146,11 @@ class Login(object):
             self.browser.close()
 
 
-    def equalsValues(self, items, valores):
+    def equalsValues(self, values_obteined, values_expected):
         b = True
         i = 0
-        while b and i < len(items):
-            if items[i] != valores[i]:
+        while b and i < len(values_obteined):
+            if values_obteined[i] != values_expected[i]:
                 b = False
             else:
                 i = i + 1
