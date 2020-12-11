@@ -5,6 +5,7 @@ from Users.Logout import Logout
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    print("teistng")
     # l = Login()
     # l.loginAdmin(False)
     # l.reset()
@@ -13,8 +14,8 @@ if __name__ == '__main__':
     # l.loginProfesional(False)
     # l = Login_inc()
     # l.login()l = Logout()
-#     # l.logout_admin()
-#     # l.logout_Secretario()
-#     # l.logout_Profesional()
-    #
+    # l.logout_admin()
+    # l.logout_Secretario()
+    # l.logout_Profesional()
+
 
